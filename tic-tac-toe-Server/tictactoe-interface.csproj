@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>tictactoe_interface</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="elements\drawPage.png" />
+    <None Remove="elements\maquette-jouer.png" />
+    <None Remove="elements\maquette-start.png" />
+    <None Remove="elements\page-accueil.png" />
+    <None Remove="elements\Rectangle 1.png" />
+    <None Remove="elements\rejouer.png" />
+    <None Remove="elements\resultatloose.png" />
+    <None Remove="elements\resultatwin.png" />
+    <None Remove="elements\start-button.png" />
+    <None Remove="elements\start-text.png" />
+    <None Remove="elements\X.png" />
+    <None Remove="elements\o.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="elements\drawPage.png" />
+    <Resource Include="elements\maquette-start.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="elements\maquette-jouer.png" />
+    <Resource Include="elements\page-accueil.png" />
+    <Resource Include="elements\Rectangle 1.png" />
+    <Resource Include="elements\rejouer.png" />
+    <Resource Include="elements\resultatloose.png" />
+    <Resource Include="elements\resultatwin.png" />
+    <Resource Include="elements\start-button.png" />
+    <Resource Include="elements\start-text.png" />
+    <Resource Include="elements\X.png" />
+    <Resource Include="elements\o.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="winnerPage.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+
+</Project>
