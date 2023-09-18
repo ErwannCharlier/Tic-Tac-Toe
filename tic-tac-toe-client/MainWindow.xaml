@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:tictactoe_interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
 
     <Grid>
         <TextBlock x:Name="textBlockConsoleOutput" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400" Height="300" />

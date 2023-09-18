@@ -167,6 +167,7 @@ namespace tictactoe_interface
             if (Game.IsFinished)
             {
                 myGrid.Visibility = Visibility.Collapsed;
+                
 
                 CellValue winner = Game.CheckWinner();
 
@@ -185,7 +186,7 @@ namespace tictactoe_interface
                     gameFrame.Navigate(new Uri("drawPage.xaml", UriKind.Relative));
 
                 }
-
+                gameFrame.NavigationService.RemoveBackEntry();
                 return true;
  
             }
