@@ -8,25 +8,25 @@ namespace tictactoe_interface
 
     public class Client
     {
-        private TcpClient tcpClient { get; set; }
-        private NetworkStream stream { get; set; }
+        private TcpClient TcpClient { get; set; }
+        private NetworkStream Stream { get; set; }
 
         public Client(string ipAddress, int port)
         {
-            tcpClient = new TcpClient(ipAddress, port);
+            TcpClient = new TcpClient(ipAddress, port);
             
         }
 
         public void Start()
         {
-            stream = tcpClient.GetStream();
+            Stream = TcpClient.GetStream();
         }
 
 
         public async Task<MessageSerializable> ReceiveMessage()
         {
             byte[] buffer = new byte[1024];
-            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+            int bytesRead = await Stream.ReadAsync(buffer, 0, buffer.Length);
             String json = Encoding.ASCII.GetString(buffer, 0, bytesRead);
             return MessageSerializable.ReadJSONSerialize(json);
 
@@ -35,7 +35,7 @@ namespace tictactoe_interface
         public void SendMessage(MessageSerializable message)
         {
             byte[] responseBytes = EncodeMessage(message.CreateJSONSerialize());
-            stream.Write(responseBytes);
+            Stream.Write(responseBytes);
         }
 
         public byte[] EncodeMessage(string message)

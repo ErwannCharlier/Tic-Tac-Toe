@@ -22,7 +22,18 @@ namespace tictactoe_interface
             O.Source = new BitmapImage(new Uri("/elements/o.png", UriKind.Relative));
 
             Game = new Game();
-            Client = ClientSingleton.Client;
+            try
+            {
+                Client = ClientSingleton.Client;
+
+            }
+            catch {
+                MessageBox.Show("Server pas en ligne");
+                myGrid.Visibility = Visibility.Collapsed;
+                gameFrame.Navigate(new Uri("HomePage.xaml", UriKind.Relative));
+                return;
+            }
+
             if(!ClientSingleton.IsConnected)
             {
                 Client.Start();
