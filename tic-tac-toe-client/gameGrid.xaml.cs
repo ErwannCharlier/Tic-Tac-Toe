@@ -104,6 +104,7 @@ namespace tictactoe_interface
                     gameFrame.Navigate(new Uri("drawPage.xaml", UriKind.Relative));
 
                 }
+                gameFrame.NavigationService.RemoveBackEntry();
                 return true;
             }
             return false;

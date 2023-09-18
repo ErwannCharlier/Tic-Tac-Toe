@@ -13,7 +13,8 @@
 
         <Frame x:Name="winnerFrame" NavigationUIVisibility="Hidden" Margin="0,0,0,0" />
 
-        <Button x:Name="RestartGameButton" Click="RestartGameButton_Click"  Margin="307,336,307,57"  Visibility="Visible">
+        <Button x:Name="RestartGameButton" Click="RestartGameButton_Click" Visibility="Visible"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,320,0,0">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Transparent"/>

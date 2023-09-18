@@ -13,16 +13,15 @@
 
         <Frame x:Name="looseFrame" NavigationUIVisibility="Hidden" Margin="0,0,0,0" />
 
-        <Button x:Name="RestartGameButton" Click="RestartGameButton_Click"  Margin="307,336,307,57"  Visibility="Visible">
+        <Button x:Name="RestartGameButton" Click="RestartGameButton_Click" Visibility="Visible"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,320,0,0">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Background" Value="Transparent"/>
-
                     <Setter Property="BorderBrush" Value="Transparent"/>
-
                 </Style>
             </Button.Style>
-            <Image Source="/elements/rejouer.png" Width="173" Height="45" RenderTransformOrigin="0.491,0.662" >
+            <Image Source="/elements/rejouer.png" Width="173" Height="45" RenderTransformOrigin="0.491,0.662">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -33,6 +32,5 @@
                 </Image.RenderTransform>
             </Image>
         </Button>
-
     </Grid>
 </Page>

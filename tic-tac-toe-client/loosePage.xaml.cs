@@ -29,6 +29,7 @@ namespace tictactoe_interface
         {
             RestartGameButton.Visibility = Visibility.Collapsed;
             looseFrame.Navigate(new Uri("gameGrid.xaml", UriKind.Relative));
+            looseFrame.NavigationService.RemoveBackEntry();
         }
     }
 }
