@@ -11,9 +11,11 @@ namespace tictactoe_interface
 
     public class Game
     {
-        public CellValue[,] Grid { get; set; }
+        private CellValue[,] Grid { get; set; }
+        private CellValue[,] LastGrid { get; set; }
+
         public const int GRIDSIZE = 3;
-        public CellValue CurentPlayer;
+        public CellValue CurentPlayer { get; private set; }
 
         public Game()
         {
@@ -25,6 +27,8 @@ namespace tictactoe_interface
         public void InitGrid()
         {
             Grid = new CellValue[GRIDSIZE, GRIDSIZE];
+            LastGrid = new CellValue[GRIDSIZE, GRIDSIZE];
+
             for (int i = 0; i < GRIDSIZE; i++)
             {
                 for (int j = 0; j < GRIDSIZE; j++)
@@ -112,14 +116,38 @@ namespace tictactoe_interface
             return Grid[0, 2] != CellValue.EMPTY && Grid[0, 2] == Grid[1, 1] && Grid[1, 1] == Grid[2, 0];
         }
 
+
         public void MakeMove(int row, int col)
         {
+            SaveLastMove();
             Grid[row, col] = CurentPlayer;
             CurentPlayer = (CurentPlayer == CellValue.CIRCLE) ? CellValue.CROSS : CellValue.CIRCLE;
         }
-        public void RemoveCoup(int row, int col)
+        public void RemoveLastMove()
         {
-            Grid[row,col] = CellValue.EMPTY;
+            CopyLastMove();
+            CurentPlayer = (CurentPlayer == CellValue.CIRCLE) ? CellValue.CROSS : CellValue.CIRCLE;
+
+        }
+        private void SaveLastMove()
+        {
+            for (int row = 0; row < GRIDSIZE; row++)
+            {
+                for (int col = 0; col < GRIDSIZE; col++)
+                {
+                    LastGrid[row, col] = Grid[row, col];
+                }
+            }
+        }
+        private void CopyLastMove()
+        {
+            for (int row = 0; row < GRIDSIZE; row++)
+            {
+                for (int col = 0; col < GRIDSIZE; col++)
+                {
+                    Grid[row, col] = LastGrid[row, col];
+                }
+            }
         }
     }
 

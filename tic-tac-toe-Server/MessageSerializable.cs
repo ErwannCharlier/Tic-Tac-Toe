@@ -1,9 +1,4 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace tictactoe_interface
 {
@@ -22,8 +17,7 @@ namespace tictactoe_interface
 
         public string CreateJSONSerialize()
         {
-            string jsonString = JsonSerializer.Serialize(this);
-            return jsonString;
+            return JsonSerializer.Serialize(this);
         }
 
         public static MessageSerializable ReadJSONSerialize(string jsonString)
@@ -31,10 +25,6 @@ namespace tictactoe_interface
 
             MessageSerializable maClasseDeserialized = JsonSerializer.Deserialize<MessageSerializable>(jsonString);
             return maClasseDeserialized;
-        }
-        public override string ToString()
-        {
-            return $"{Row} {Col} {HasError} ";
         }
     }
 }

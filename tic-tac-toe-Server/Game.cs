@@ -1,19 +1,19 @@
-﻿using System;
-
-namespace tictactoe_interface
+﻿namespace tictactoe_interface
 {
     public enum CellValue
     {
         CROSS = 'X',
         CIRCLE = 'O',
-        EMPTY = 'F'
+        EMPTY = ' '
     }
 
     public class Game
     {
-        public CellValue[,] Grid { get; set; }
+        private CellValue[,] Grid { get; set; }
+        //permet de sauvegarder l'état de la grid du coup précédent
+        private CellValue[,] LastGrid { get; set; } 
         public const int GRIDSIZE = 3;
-        public CellValue CurentPlayer;
+        public CellValue CurentPlayer { get; private set; }
 
         public Game()
         {
@@ -24,11 +24,14 @@ namespace tictactoe_interface
         public void StartGame()
         {
             Grid = new CellValue[GRIDSIZE, GRIDSIZE];
+            LastGrid = new CellValue[GRIDSIZE, GRIDSIZE];
             for (int i = 0; i < GRIDSIZE; i++)
             {
                 for (int j = 0; j < GRIDSIZE; j++)
                 {
                     Grid[i, j] = CellValue.EMPTY;
+                    LastGrid[i, j] = CellValue.EMPTY;
+
                 }
             }
         }
@@ -47,7 +50,7 @@ namespace tictactoe_interface
 
         public CellValue CheckWinner()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < GRIDSIZE; i++)
             {
                 if (CheckRow(i))
                 {
@@ -113,12 +116,35 @@ namespace tictactoe_interface
 
         public void MakeMove(int row, int col)
         {
+            SaveLastMove();
             Grid[row, col] = CurentPlayer;
             CurentPlayer = (CurentPlayer == CellValue.CIRCLE) ? CellValue.CROSS : CellValue.CIRCLE;
         }
-        public void RemoveCoup(int row, int col)
+        public void RemoveLastMove()
         {
-            Grid[row,col] = CellValue.EMPTY;
+            CopyLastMove();
+            CurentPlayer = (CurentPlayer == CellValue.CIRCLE) ? CellValue.CROSS : CellValue.CIRCLE;
+
+        }
+        private void SaveLastMove()
+        {
+            for (int row = 0; row < GRIDSIZE; row++)
+            {
+                for (int col = 0; col < GRIDSIZE; col++)
+                {
+                    LastGrid[row, col] = Grid[row, col];
+                }
+            }
+        }
+        private void CopyLastMove()
+        {
+            for (int row = 0; row < GRIDSIZE; row++)
+            {
+                for (int col = 0; col < GRIDSIZE; col++)
+                {
+                     Grid[row, col] = LastGrid[row,col];
+                }
+            }
         }
     }
 

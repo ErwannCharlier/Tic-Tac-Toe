@@ -1,12 +1,8 @@
 ﻿using System;
-using System.IO.Compression;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
 
@@ -30,6 +26,7 @@ namespace tictactoe_interface
 
             Game = new Game();
             Server = SingletonServer.Server;
+
             if (!SingletonServer.IsConnected)
             {
                 ShowWaitingMessage();
@@ -48,7 +45,6 @@ namespace tictactoe_interface
             
             else
             {
-                // La connexion est déjà établie, vous pouvez effectuer d'autres opérations ici si nécessaire.
                 HideWaitingMessage();
                 ReloadGrid();
             }
@@ -104,12 +100,14 @@ namespace tictactoe_interface
                 Server.SendMessage(messageMove);
 
             }
-            catch {
+            catch(SocketException ex) {
                 HandleDisconnection();
                 return;
             }
+            
             if(HandleGameFinished())
                 return;
+
             HandleResponse(row,col);
             
 
@@ -125,7 +123,7 @@ namespace tictactoe_interface
                 // voir si le coup a été flag
                 if (moveReceived.HasError)
                 {
-                    Game.RemoveCoup(row, col);
+                    Game.RemoveLastMove();
                     ReloadGrid();
                     MessageBox.Show("Coup précédent invalide, rejoue");
                     return;
@@ -148,7 +146,7 @@ namespace tictactoe_interface
                 ReloadGrid();
                 HandleGameFinished();
             }
-            catch
+            catch(SocketException ex) 
             {
                 HandleDisconnection();
 

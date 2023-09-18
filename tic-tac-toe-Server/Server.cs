@@ -1,22 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using System.ComponentModel;
-using System.Windows;
 
-enum ErrorCode
-{
-    NO_ERROR = 0 ,
-    INVALID_MOVE = -1,
-    CLIENT_DISCONNECTION = -2,
-    ERROR = -3
-
-
-}
 namespace tictactoe_interface
 {
 
@@ -47,19 +33,14 @@ namespace tictactoe_interface
             byte[] receivedBytes = new byte[100];
             int bytesRead = await clientSocket.ReceiveAsync(receivedBytes, SocketFlags.None);
             string receivedMessage = DecodeMessage(receivedBytes, bytesRead);
-            Console.WriteLine("Received: " + receivedMessage);
-
             return MessageSerializable.ReadJSONSerialize(receivedMessage);
 
         }
 
         public void SendMessage(MessageSerializable message)
         {
-
             byte[] responseBytes = EncodeMessage(message.CreateJSONSerialize());
-            clientSocket.Send(responseBytes);
-            Console.WriteLine("Sent Message");
-            
+            clientSocket.Send(responseBytes);            
         }
 
         public byte[] EncodeMessage(string message)

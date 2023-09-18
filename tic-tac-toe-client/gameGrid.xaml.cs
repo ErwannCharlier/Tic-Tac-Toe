@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IO.Compression;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
 
@@ -106,12 +103,11 @@ namespace tictactoe_interface
             // Attendre le premier message du serveur
             MessageSerializable moveReceived = await Client.ReceiveMessage();
 
-
-            // voir si le coup a été flag
+            // voir si le coup a été flag comme non valide
             if (moveReceived.HasError)
             {
                 MessageBox.Show("Coup précédent invalide. Rejoue");
-                Game.RemoveCoup(row, col);
+                Game.RemoveLastMove();
                 ReloadGrid();
             }
 
